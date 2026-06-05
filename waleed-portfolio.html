@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waleed Ahmed Razzaqi — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0c10; --bg2: #13141a; --bg3: #1a1c25;
+    --accent: #00f5a0; --accent2: #00d4ff;
+    --text: #e8e8f0; --muted: #6b6d80; --border: rgba(255,255,255,0.07); --card: rgba(255,255,255,0.04);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    backdrop-filter: blur(20px);
+    background: rgba(11,12,16,0.85);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(0,245,160,0.08) 0%, transparent 70%); top: 10%; right: -100px; pointer-events: none; }
+  .hero-glow2 { position: absolute; width: 400px; height: 400px; background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%); bottom: 10%; left: -50px; pointer-events: none; }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-tag::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--accent); }
+  h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  h1 .line1 { display: block; color: var(--text); }
+  h1 .line2 { display: block; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-desc { max-width: 540px; color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; }
+  .hero-cta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary { font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; background: var(--accent); color: #0b0c10; border-radius: 2px; font-weight: 500; transition: all 0.2s; }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+  .btn-outline { font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .hero-scroll { position: absolute; bottom: 2.5rem; left: 4rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.75rem; animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  .hero-scroll::after { content: ''; display: block; width: 1px; height: 3rem; background: linear-gradient(to bottom, var(--muted), transparent); }
+  section { padding: 6rem 4rem; position: relative; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label::before { content: ''; width: 2rem; height: 1px; background: var(--accent); }
+  h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; }
+  .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 1.02rem; line-height: 1.85; }
+  .about-text p span { color: var(--text); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  #skills { background: var(--bg2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1100px; }
+  .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; transition: border-color 0.2s; }
+  .skill-group:hover { border-color: rgba(0,245,160,0.3); }
+  .skill-group-title { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag { font-family: 'DM Mono', monospace; font-size: 0.78rem; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 2px; color: var(--muted); transition: all 0.2s; }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; max-width: 1100px; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; display: flex; flex-direction: column; transition: all 0.3s; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: rgba(0,245,160,0.25); transform: translateY(-4px); }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .project-icon { width: 44px; height: 44px; background: rgba(0,245,160,0.1); border: 1px solid rgba(0,245,160,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link { color: var(--muted); text-decoration: none; font-size: 0.8rem; font-family: 'DM Mono', monospace; letter-spacing: 0.06em; padding: 0.25rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; transition: all 0.2s; }
+  .project-link:hover { color: var(--accent); border-color: rgba(0,245,160,0.4); }
+  .project-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--text); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+  .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 0.2rem 0.6rem; background: rgba(0,245,160,0.08); color: var(--accent); border-radius: 2px; letter-spacing: 0.05em; }
+  #education { background: var(--bg2); }
+  .edu-card { max-width: 700px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; display: flex; gap: 2rem; align-items: flex-start; position: relative; overflow: hidden; }
+  .edu-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; white-space: nowrap; padding-top: 0.2rem; }
+  .edu-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--text); margin-bottom: 0.35rem; }
+  .edu-uni { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.75rem; }
+  .edu-detail { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; background: rgba(0,245,160,0.08); display: inline-block; padding: 0.25rem 0.75rem; border-radius: 2px; }
+  .contact-inner { max-width: 700px; }
+  .contact-inner p { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .contact-link { font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 1.75rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; display: flex; align-items: center; gap: 0.6rem; transition: all 0.2s; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  footer { padding: 2.5rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; }
+  footer span { color: var(--accent); }
+  .cursor-glow { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,245,160,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%, -50%); transition: left 0.15s ease, top 0.15s ease; }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .hero { padding: 5rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<nav>
+  <a href="#" class="nav-logo">WAR.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-tag">Available for opportunities</div>
+  <h1>
+    <span class="line1">Waleed Ahmed</span>
+    <span class="line2">Razzaqi.</span>
+  </h1>
+  <p class="hero-desc">Software Engineer & SE Student passionate about building impactful web applications, AI systems, and everything in between.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <div class="section-label">About Me</div>
+      <h2>Building Things<br>That Matter</h2>
+      <p>I'm a <span>Software Engineering student at Bahria University, Islamabad</span>, with a passion for full-stack development and artificial intelligence.</p>
+      <p>I build real-world applications using the <span>MERN stack</span>, experiment with <span>Python & AI/ML</span>, and love turning complex ideas into clean, functional products.</p>
+      <p>From real-time chat apps to AI-powered recognition systems, I push myself to ship projects that solve real problems.</p>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-card"><div class="stat-num">35+</div><div class="stat-label">GitHub Repos</div></div>
+      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Live Projects</div></div>
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Technologies</div></div>
+      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Years Coding</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Use</div>
+  <h2>Skills & Tools</h2>
+  <div class="skills-grid fade-in">
+    <div class="skill-group"><div class="skill-group-title">Frontend</div><div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">React.js</span></div></div>
+    <div class="skill-group"><div class="skill-group-title">Backend</div><div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">Socket.io</span><span class="skill-tag">REST APIs</span></div></div>
+    <div class="skill-group"><div class="skill-group-title">Database</div><div class="skill-tags"><span class="skill-tag">MongoDB</span><span class="skill-tag">MySQL</span><span class="skill-tag">Supabase</span></div></div>
+    <div class="skill-group"><div class="skill-group-title">Languages</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">Java</span><span class="skill-tag">Bash</span></div></div>
+    <div class="skill-group"><div class="skill-group-title">AI / ML</div><div class="skill-tags"><span class="skill-tag">Jupyter Notebook</span><span class="skill-tag">OpenCV</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Pandas</span></div></div>
+    <div class="skill-group"><div class="skill-group-title">Tools & Platforms</div><div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">Vercel</span><span class="skill-tag">VS Code</span></div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2>Featured Projects</h2>
+  <div class="projects-grid fade-in">
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">💬</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/Nexus-Chat-Application" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">Nexus Chat Application</div>
+      <p class="project-desc">Real-time full-stack chat application built with MERN stack and Socket.io. Supports live messaging, user authentication, and dynamic chat rooms.</p>
+      <div class="project-stack"><span class="stack-tag">MongoDB</span><span class="stack-tag">Express</span><span class="stack-tag">React</span><span class="stack-tag">Node.js</span><span class="stack-tag">Socket.io</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🛒</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/ECommerce-Website-MERN" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">E-Commerce Platform</div>
+      <p class="project-desc">Full-featured e-commerce web application built with the MERN stack. Includes product listings, cart management, user auth, and order tracking.</p>
+      <div class="project-stack"><span class="stack-tag">MongoDB</span><span class="stack-tag">Express</span><span class="stack-tag">React</span><span class="stack-tag">Node.js</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🧸</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/Wonderland-Toystore-Project" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">Wonderland Toystore</div>
+      <p class="project-desc">Final year Software Construction project — a full toy store web application with product management, user roles, and a complete shopping experience.</p>
+      <div class="project-stack"><span class="stack-tag">JavaScript</span><span class="stack-tag">Node.js</span><span class="stack-tag">Express</span><span class="stack-tag">MongoDB</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">😌</div><div class="project-links"><a href="https://relaxa-one.vercel.app" class="project-link" target="_blank">Live ↗</a></div></div>
+      <div class="project-name">Relaxaa</div>
+      <p class="project-desc">A live mental wellness and relaxation web app with a clean UI. Focused on calm user experience, accessibility, and seamless performance on Vercel.</p>
+      <div class="project-stack"><span class="stack-tag">React</span><span class="stack-tag">CSS</span><span class="stack-tag">Vercel</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">📋</div><div class="project-links"><a href="https://github.com/WaleedAhmed10" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">Campus Notice Board System</div>
+      <p class="project-desc">A university notice board platform where admins post announcements and students view categorized notices in real-time. Built for campus-scale use.</p>
+      <div class="project-stack"><span class="stack-tag">MongoDB</span><span class="stack-tag">Express</span><span class="stack-tag">React</span><span class="stack-tag">Node.js</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🅿️</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/DBMS-Project" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">Space Saver — Car Parking System</div>
+      <p class="project-desc">DBMS project implementing a full car parking management system with slot booking, availability tracking, and an admin dashboard.</p>
+      <div class="project-stack"><span class="stack-tag">JavaScript</span><span class="stack-tag">MySQL</span><span class="stack-tag">HTML/CSS</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">☕</div><div class="project-links"><a href="https://github.com/hasanzafzal/OOP-Semester-Project" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">OOP Semester Project</div>
+      <p class="project-desc">Object-Oriented Programming semester project built in Java. Demonstrates clean OOP design patterns, inheritance, encapsulation, and polymorphism.</p>
+      <div class="project-stack"><span class="stack-tag">Java</span><span class="stack-tag">OOP</span><span class="stack-tag">Design Patterns</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🤖</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/AI-Braille-Recognition-System" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">AI Braille Recognition System</div>
+      <p class="project-desc">AI-powered system that recognizes and translates Braille characters using computer vision and machine learning techniques built in Python.</p>
+      <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">OpenCV</span><span class="stack-tag">Machine Learning</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🌾</div><div class="project-links"><a href="https://github.com/WaleedAhmed10/Agriculture-Farming-Predictor" class="project-link" target="_blank">GitHub ↗</a></div></div>
+      <div class="project-name">Agriculture Farming Predictor</div>
+      <p class="project-desc">ML-based predictor that recommends optimal crops and farming conditions based on soil and climate data. Built with Python and Jupyter Notebook.</p>
+      <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">Jupyter</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">Pandas</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">My Background</div>
+  <h2>Education</h2>
+  <div class="edu-card fade-in">
+    <div class="edu-year">2023 — Present</div>
+    <div>
+      <div class="edu-name">Bachelor of Science in Software Engineering</div>
+      <div class="edu-uni">Bahria University, Islamabad, Pakistan</div>
+      <div class="edu-detail">BSSE · Currently Enrolled</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <div class="section-label">Get In Touch</div>
+    <h2>Let's Work<br>Together</h2>
+    <p>I'm currently open to internship and freelance opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.</p>
+    <div class="contact-links">
+      <a href="mailto:waleed85147@://gmail.com" class="contact-link">✉ Email Me</a>
+      <a href="https://github.com/WaleedAhmed10" class="contact-link" target="_blank">⌥ GitHub</a>
+      <a href="https://linkedin.com/in/waleedahmedrazzaqi" class="contact-link" target="_blank">in LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Waleed Ahmed Razzaqi</span></p>
+  <p>© 2026 · All rights reserved</p>
+</footer>
+
+<script>
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
