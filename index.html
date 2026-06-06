@@ -47,7 +47,7 @@
   .section-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
   .section-label::before { content: ''; width: 2rem; height: 1px; background: var(--accent); }
   h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; }
+  .about-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 5rem; align-items: center; max-width: 1100px; }
   .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 1.02rem; line-height: 1.85; }
   .about-text p span { color: var(--text); }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
@@ -100,9 +100,22 @@
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
   }
-    .about-photo { margin-bottom: 1rem; }
-    .photo-wrapper { width: 160px; height: 160px; }
-    .profile-photo { width: 160px; height: 160px; }
+    .about-photo { display: flex; align-items: flex-start; justify-content: center; align-self: start; padding-top: 0.5rem; }
+    .photo-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+  }
+    .profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid rgba(0,245,160,0.4);
+    display: block;
+    box-shadow: 0 0 40px rgba(0,245,160,0.12);
   }
   .hero-profile-img {
     width: 90px;
